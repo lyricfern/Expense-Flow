@@ -1,0 +1,255 @@
+/* ---------- Page setup ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    color-scheme: dark;
+
+    --text: #f8f2ff;
+    --muted: #c7b7dc;
+    --pink: #f19adc;
+    --border: rgba(223, 190, 255, 0.22);
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+
+    min-height: 100vh;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+
+    background-color: #100819;
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 19px;
+    line-height: 1.5;
+}
+
+/* ---------- Galaxy background ---------- */
+
+.background-video {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    filter: brightness(0.42) saturate(1.15);
+    pointer-events: none;
+}
+
+/* Adds a soft dark layer so the text stays readable */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background: linear-gradient(
+        135deg,
+        rgba(15, 7, 28, 0.78),
+        rgba(40, 11, 45, 0.48),
+        rgba(10, 7, 24, 0.78)
+    );
+
+    pointer-events: none;
+}
+
+/* ---------- Headings and text ---------- */
+
+h1 {
+    margin: 0 0 12px;
+
+    color: #f3d7ff;
+    font-size: clamp(2.6rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+
+    text-shadow: 0 4px 30px rgba(221, 120, 255, 0.3);
+}
+
+h2 {
+    margin: 48px 0 18px;
+    color: #f1d8ff;
+    font-size: 1.8rem;
+}
+
+p {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+/* Total and count values */
+#total,
+#count {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ---------- Inputs ---------- */
+
+input {
+    width: 240px;
+    max-width: 100%;
+    min-height: 58px;
+    margin: 10px 10px 10px 0;
+    padding: 14px 17px;
+
+    border: 1px solid var(--border);
+    border-radius: 13px;
+
+    background: rgba(30, 16, 48, 0.88);
+    color: var(--text);
+    font: inherit;
+    font-size: 1rem;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+    color: #bba9cd;
+}
+
+input:hover {
+    border-color: rgba(242, 183, 255, 0.6);
+}
+
+input:focus {
+    outline: none;
+    border-color: #e7a4f6;
+    box-shadow: 0 0 0 4px rgba(213, 119, 238, 0.2);
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+    min-height: 56px;
+    padding: 13px 23px;
+
+    border: 0;
+    border-radius: 13px;
+
+    background: linear-gradient(120deg, #aa54e9, #e14db2);
+    color: white;
+    font: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(173, 60, 190, 0.25);
+
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(211, 89, 222, 0.4);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:focus-visible {
+    outline: 3px solid #f2c5ff;
+    outline-offset: 3px;
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+/* ---------- Expense list ---------- */
+
+#expense-list {
+    display: grid;
+    gap: 12px;
+
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+#expense-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    min-height: 78px;
+    padding: 18px 20px;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    background: rgba(35, 20, 52, 0.88);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+#expense-list li:hover {
+    border-color: rgba(236, 171, 255, 0.5);
+    background-color: rgba(53, 28, 74, 0.95);
+}
+
+.delete-button {
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 9px 15px;
+
+    background: #a52f68;
+    font-size: 0.9rem;
+    box-shadow: none;
+}
+
+.delete-button:hover:not(:disabled) {
+    background: #c13c7b;
+    box-shadow: 0 7px 18px rgba(193, 60, 123, 0.3);
+}
+
+/* ---------- Smaller screens ---------- */
+
+@media (max-width: 600px) {
+    body {
+        padding: 36px 20px 70px;
+    }
+
+    h1 {
+        font-size: 2.6rem;
+    }
+
+    input,
+    #add-button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    h2 {
+        margin-top: 38px;
+    }
+}
+
+/* Reduce motion when the device requests it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+
+    .background-video {
+        display: none;
+    }
+}
